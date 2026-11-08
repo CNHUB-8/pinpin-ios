@@ -35,7 +35,7 @@ public enum Palette {
     private static let maximumFileBytes = 64 * 1024 * 1024
     public init(directoryURL: URL? = nil) {
         let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-            ?? FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Documents", isDirectory: true)
+            ?? URL(fileURLWithPath: NSHomeDirectory(), isDirectory: true).appendingPathComponent("Documents", isDirectory: true)
         self.directoryURL = directoryURL ?? documents.appendingPathComponent("BeadStudioPatterns", isDirectory: true)
         encoder = JSONEncoder(); encoder.outputFormatting = [.sortedKeys]
         decoder = JSONDecoder()
