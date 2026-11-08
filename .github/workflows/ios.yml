@@ -1,0 +1,14 @@
+name: iOS simulator verification
+on: [workflow_dispatch]
+jobs:
+  test:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - run: brew install xcodegen
+      - run: xcodegen generate
+      - name: Select simulator and run tests
+        shell: bash
+        run: |
+          DEVICE=$(xcrun simctl list devices available -j | python3 -c 'import json,sys; d=json.load(sys.stdin); print(next(x["udid"] for k,v in d["devices"].items() if "iOS" in k for x in v if "iPhone" in x["name"]))')
+          xcodebuild test -project BeadStudio.xcodeproj -scheme BeadStudio -destination "platform=iOS Simulator,id=$DEVICE" CODE_SIGNING_ALLOWED=NO

@@ -1,0 +1,8 @@
+analysis/
+build/
+*.xcodeproj/
+*.xcworkspace/
+.DS_Store
+*.ipa
+*.p12
+*.mobileprovision
