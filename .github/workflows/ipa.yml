@@ -46,7 +46,7 @@ jobs:
           set -euo pipefail
           APP=build/DerivedData/Build/Products/Release-iphoneos/BeadStudio.app
           test -f "$APP/BeadStudio"
-          xcrun lipo -verify_arch arm64 "$APP/BeadStudio"
+          xcrun lipo "$APP/BeadStudio" -verify_arch arm64
           mkdir -p build/package/Payload
           ditto "$APP" build/package/Payload/BeadStudio.app
           cd build/package
